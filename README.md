@@ -9,6 +9,7 @@ Files:
 
 Notes:
 - This site does not itself modify or rebroadcast transactions. To actually speed up a transaction you must either use your wallet's RBF/CPFP functionality or use a third-party mining-pool accelerator.
+- The page includes an "Accelerate now" button that opens external accelerator services if your TX is still unconfirmed.
 - The donations address shown in the Donations tab is: `bc1qlwf32ee3ssjh6p5548ufa6zr36cyzy4jfv3zd6`.
 - Footer displays `bitcoinadvancedunlimiteddr12.space` as requested.
 

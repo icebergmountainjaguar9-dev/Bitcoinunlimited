@@ -12,7 +12,13 @@ tabDon.addEventListener('click',()=>{tabDon.classList.add('active');tabHome.clas
 const txField = qs('#txid')
 const checkBtn = qs('#checkBtn')
 const result = qs('#result')
-const openAccelerator = qs('#openAccelerator')
+const accelerateBtn = qs('#accelerateBtn')
+
+const ACCELERATOR_SERVICES = [
+  {name:'ViaBTC Transaction Accelerator', url:'https://www.viabtc.com/tools/txaccelerator/', needsTxid:false},
+  {name:'Bitcoin Pool Accelerator Guide', url:'https://mempool.space/tx/', needsTxid:true},
+  {name:'Blockchair Transaction View', url:'https://blockchair.com/bitcoin/transaction/', needsTxid:true},
+]
 
 function extractTxid(input){
   if(!input) return ''
@@ -45,6 +51,13 @@ async function lookupTx(txid){
     if(data.vsize) html += `<p>Virtual size: ${data.vsize} vbytes</p>`
     if(data.fee) html += `<p>Fee: ${data.fee} satoshis</p>`
     html += `<p>View on block explorer: <a href="https://blockstream.info/tx/${txid}" target="_blank">blockstream.info</a></p>`
+    if(!data.status || !data.status.confirmed){
+      html += `<div class="accelerator-list"><p><strong>Unconfirmed transaction.</strong> Use these options to request faster mining:</p><ul>`
+      html += `<li><a href="https://www.viabtc.com/tools/txaccelerator/" target="_blank">ViaBTC Transaction Accelerator</a></li>`
+      html += `<li><a href="https://blockchair.com/bitcoin/transaction/${txid}" target="_blank">Open TX on Blockchair</a> to review mempool details.</li>`
+      html += `<li><a href="https://mempool.space/tx/${txid}" target="_blank">View on mempool.space</a> for fee and confirmation estimates.</li>`
+      html += `</ul><p>Try RBF or CPFP if your wallet supports it, or paste the TXID into a pool accelerator.</p></div>`
+    }
     result.innerHTML = html
   }catch(err){ result.textContent = 'Error while fetching transaction info.' }
 }
@@ -55,16 +68,13 @@ checkBtn.addEventListener('click',()=>{
   lookupTx(txid)
 })
 
-openAccelerator.addEventListener('click',()=>{
+accelerateBtn.addEventListener('click',()=>{
   const txid = extractTxid(txField.value)
-  // Open popular mining pool acceleration pages so user can paste TXID there.
-  // We open ViaBTC accelerator page.
-  if(!txid){ window.open('https://www.viabtc.com/tools/txaccelerator/','_blank'); return }
-  // Open ViaBTC and Blockchair as options
-  const via = 'https://www.viabtc.com/tools/txaccelerator/'
-  const blockchair = `https://blockchair.com/bitcoin/transaction/${txid}`
-  window.open(via,'_blank')
-  window.open(blockchair,'_blank')
+  if(!txid){ result.textContent = 'Please enter a transaction ID or link before accelerating.'; return }
+  ACCELERATOR_SERVICES.forEach(service=>{
+    const target = service.needsTxid ? `${service.url}${txid}` : service.url
+    window.open(target,'_blank')
+  })
 })
 
 // Donations copy

@@ -12,6 +12,11 @@ textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255
 .row{display:flex;gap:10px;margin-top:10px}
 button{background:var(--accent);border:none;padding:10px 14px;border-radius:8px;color:#08111a;cursor:pointer}
 button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+.hint{margin-top:10px;color:var(--muted);font-size:0.95rem}
+.accelerator-list{margin-top:14px;padding:12px;border-radius:10px;background:rgba(245,158,11,0.08);color:var(--text)}
+.accelerator-list ul{margin:10px 0 0 18px;padding:0}
+.accelerator-list li{margin-bottom:8px}
+.accelerator-list a{color:#ffde7d;text-decoration:underline}
 .result{margin-top:16px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.01);color:var(--muted)}
 .hidden{display:none}
 .donation-box{display:flex;gap:10px;align-items:center}
