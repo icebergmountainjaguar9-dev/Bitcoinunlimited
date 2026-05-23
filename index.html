@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bitcoin Advanced Unlimited DR12</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Bitcoin Advanced Unlimited DR12</h1>
+    <nav>
+      <button id="tab-home" class="active">Home</button>
+      <button id="tab-donations">Donations</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="tab-pane">
+      <h2>Speed up a mempool transaction</h2>
+      <p>Paste your transaction ID (TXID) or blockchain link below to view status and get options to attempt acceleration.</p>
+
+      <label for="txid">Transaction ID or link</label>
+      <textarea id="txid" placeholder="e.g. 4d3... or https://blockstream.info/tx/4d3..." rows="2"></textarea>
+      <div class="row">
+        <button id="checkBtn">Check status</button>
+        <button id="openAccelerator" class="secondary">Open pool accelerator</button>
+      </div>
+
+      <div id="result" class="result"></div>
+
+      <h3>How this works</h3>
+      <ul>
+        <li>This page looks up TX status via public block explorer APIs.</li>
+        <li>To actually speed up a transaction you can use mining-pool accelerators (they're third-party services). This site helps you find and open them.</li>
+        <li>If your wallet supports RBF or CPFP you can use those features to bump fees.</li>
+      </ul>
+    </section>
+
+    <section id="donations" class="tab-pane hidden">
+      <h2>Donations</h2>
+      <p>If you'd like to donate, send BTC to the address below.</p>
+      <div class="donation-box">
+        <code id="donationAddress">bc1qlwf32ee3ssjh6p5548ufa6zr36cyzy4jfv3zd6</code>
+        <button id="copyDonation">Copy</button>
+      </div>
+      <p>Thank you.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>bitcoinadvancedunlimiteddr12.space</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
